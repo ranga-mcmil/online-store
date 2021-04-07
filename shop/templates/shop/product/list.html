@@ -1,0 +1,29 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% block title %}
+{% if category %}{{ category.name }}{% else %}Products{% endif %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="">
+        <div class="row" >
+            <h1 class="product-name">{% if category %}{{ category.name }}{% else %}Products{% endif %}</h1>
+        </div>
+
+        <div class="row">
+            {% for product in products %}
+                <div class="item col-4">
+                    <a href="{{ product.get_absolute_url }}">
+                        <img class="product-image-small" src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt="">
+                    </a>
+                    <div>
+                        <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+                        ${{ product.price }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+{% endblock %}
